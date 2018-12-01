@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% block nav %}
+    <A>CATEGORIAS<A><br>
+      <a href="/">All</a><br>
+    {% for c in categories%}
+    <a href="/workflow_list/{{c.slug}}/">{{c.name}}</a>
+    <br>
+    {% endfor %}
+
+  {% endblock %}
+
+  {% block article %}
+  <div class = "margin_izquierda">
+  <A>WORKFLOWS<A><br>
+    {% for w in workflows_p%}
+      <a href="/workflow_detail/{{w.id}}/{{w.slug}}">{{w.name}}</a>
+      <a> : {{w.description}}</a>
+    <br>
+    {% endfor %}
+    {% if workflows_p.has_previous %}
+      <a href="?page={{ workflows_p.previous_page_number }}">&laquo;</a>
+    {% else %}
+      <a class="disabled"><span>&laquo;</span></a>
+    {% endif %}
+    {% for i in workflows_p.paginator.page_range %}
+      {% if workflows_p.number == i %}
+        <a class="active"><span>{{ i }} <span class="sr-only"></span></span></a>
+      {% else %}
+        <a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if workflows_p.has_next %}
+      <a href="?page={{ workflows_p.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <a class="disabled"><span>&raquo;</span></a>
+    {% endif %}
+  </div>
+
+   {% endblock %}
+{% endblock %}

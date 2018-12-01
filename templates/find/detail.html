@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block article %}
+  {% if result == False %}
+    <h3>{{error}}</h3>
+
+  {% else  %}
+    <a>Nombre: {{workflow.name}}</a> <br>
+    <a>Categorias: </a>
+    {% for c in categories%}
+      <a>{{c.name}},</a>
+    {% endfor %}
+    <br>
+    <a>KeyWords: {{workflow.keywords}}</a><br>
+    <a>Description: {{workflow.description}}</a><br>
+  {%  endif %}
+
+{% endblock %}

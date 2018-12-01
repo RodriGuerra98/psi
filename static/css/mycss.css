@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+}
+
+.article {
+	background-color: #FFFFFF;
+	padding: 10px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	float: left;
+	width: 80%;
+	height: 75vh;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.nav {
+	background: #4F000B;
+	float: left;
+	width: 20%;
+	height: 75vh;
+    padding: 10px;
+	overflow: hidden;
+}
+
+
+
+@media (max-width: 1023px) {
+  .nav {
+	width:200px;
+  }
+  .article{
+	width:calc(100% - 200px);
+}

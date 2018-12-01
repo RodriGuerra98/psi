@@ -1,0 +1,64 @@
+
+<!doctype html>
+{%load static %}
+<html lang="en">
+
+
+
+  <head>
+  {%block extra_css %}
+  <link rel ="stylesheet"  type= "text/css" href="{%static 'css/rodricss.css'%}">
+  {% endblock %}
+    <title>
+      {% block title %}
+       App
+       {% endblock %}
+     </title>
+  </head>
+
+  <header>{% block header %}
+    <h1> <a href="/">App HEROKU</a></h1>
+
+    {% endblock %}
+  </header>
+
+  <body>
+
+    <div class="flex-container">
+      <div class=" azul1 ">
+        {% block subheader %}
+        <h5>Search Workflow</h5>
+        <form action='/workflow_search/' method='post'>
+          {% csrf_token %}
+          <select name="selector">
+           <option value="name">Name</option>
+           <option value="slug">Slug</option>
+         </select>
+        <input type = 'text' placeholder="Search a workflow..." name ="key" id ="name">
+        <input type = 'submit' value = "Search">
+        {% endblock %}
+      </div>
+
+      <div class= "tamanopadre">
+          <div class="tamanohijo1  menulateral izquierda">
+            {% block nav %}
+            {% endblock %}
+    			</div>
+
+    			<div class="tamanohijo2 izquierda frame txt_izquierda  ">
+    				{% block article %}
+            {% endblock %}
+          </div>
+
+      </div>
+    </div>
+  </body>
+
+  <footer class="centrado azul1 footer">
+    {% block footer %}
+    <h4> Footer de la app</h4>
+    {% endblock %}
+  </footer>
+
+
+</html>

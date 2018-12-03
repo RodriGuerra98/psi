@@ -10,15 +10,17 @@ from find import views
 
 def add_workflow(request):
     form = WorkflowForm()
-
-    if( request.method() == 'POST'):
-        form = WorkflowForm(request.POST)
-
+    if request.method == 'POST':
+        form=WorkflowForm(request.POST)
         if form.is_valid():
             form.save(commit=True)
-            return workflow_list(request)
+            return views.workflow_list(request)
         else:
             print(form.errors)
+
+
     categories = Category.objects.all()
+
+
 
     return render(request, 'upload/add_workflow.html', {'form' : form, 'categories' : categories})

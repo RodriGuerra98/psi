@@ -121,6 +121,22 @@ button,input, select{
 
 }
 
+
+table{
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th{
+	border: 1px solid #000;
+	text-align: center;
+	padding: 8px;
+}
+
+tr:nth-child(even){
+	background-color: #9dd7e1
+}
 .menulateral{
     height: 90%;
     border-radius: 25px;

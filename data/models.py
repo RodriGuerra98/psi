@@ -27,13 +27,13 @@ class Workflow(models.Model):
     name = models.CharField(blank=False, unique=True, max_length=255) #AUMENTADO
     slug = models.SlugField(blank=True, unique=True, max_length=512)
     created = models.DateField(default=datetime.date.today)
-    description = models.CharField(max_length=512, default="")
-    views = models.IntegerField()
-    downloads = models.IntegerField()
-    versionInit = models.CharField(max_length=512)
     category = models.ManyToManyField(Category, through ='CategoriesAmount')
-    client_ip = models.GenericIPAddressField(default='127.0.0.1')
     keywords = models.CharField(max_length=512, default="")
+    description = models.CharField(max_length=512, default="")
+    views = models.IntegerField(default = 0)
+    downloads = models.IntegerField(default =0)
+    versionInit = models.CharField(max_length=512)
+    client_ip = models.GenericIPAddressField(default='127.0.0.1')
     #json = JSONField()
 
     def save(self, *args, **kwargs):

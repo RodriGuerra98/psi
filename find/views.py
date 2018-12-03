@@ -60,7 +60,7 @@ def workflow_detail(request, id, slug):
     result= True
     error = ""
     workflow = None
-    print workflows
+
 
     for x in workflows:
         if(str(x.id)==str(id)):
@@ -76,8 +76,9 @@ def workflow_detail(request, id, slug):
     categories = []
     for y in all:
         for z in categories_aux:
-            if(str(y.id)==str(z.id)):
+            if(str(y.id)==str(z.categories.id)):
                 categories.append(y)
+
 
 
     _dict['result'] = result      # False if no workflow satisfices the query

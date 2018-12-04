@@ -7,7 +7,7 @@ class WorkflowForm(forms.ModelForm):
     description = forms.CharField(max_length=512, help_text ="Description: ")
     versionInit = forms.CharField(max_length=512, help_text = "versionInit:")
     category = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), help_text = "Categorias: ")
-
+    json = forms.FileField()
 
     class Meta:
         model = Workflow
@@ -18,6 +18,15 @@ class WorkflowForm(forms.ModelForm):
         workflow.name = self.data['name']
         workflow.keywords = self.data['keywords']
         workflow.versionInit = self.data['versionInit']
+        workflow.description = self.data['description']
+        #workflow.json = self.data['json']
+        print "posta 2"
+        workflowFile = self.cleaned_data['json']
+        file_data = workflowFile.read().decode('utf-8')
+        self.instance.json = file_data
+        workflow.json = file_data
+        print "posta 3"
+        #print workflow.json
         workflow.save()
         categorias = self.cleaned_data['category']
         print '******************'

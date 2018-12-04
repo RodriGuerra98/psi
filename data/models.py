@@ -34,7 +34,7 @@ class Workflow(models.Model):
     downloads = models.IntegerField(default =0)
     versionInit = models.CharField(max_length=512)
     client_ip = models.GenericIPAddressField(default='127.0.0.1')
-    #json = JSONField()
+    json = models.CharField(max_length=20000, default="hola")
 
     def save(self, *args, **kwargs):
         self.slug =  slugify(self.name)

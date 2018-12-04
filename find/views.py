@@ -120,3 +120,10 @@ def workflow_search(request):
     _dict['categories'] = []
     _dict['categories'] = categories
     return render(request, 'find/detail.html', context= _dict)
+
+
+def workflow_download(request, id ,slug, count = True):
+    workflow =  Workflow.objects.filter(id = id)
+    if workflow is None :
+        return
+    workflow.downloads +=1

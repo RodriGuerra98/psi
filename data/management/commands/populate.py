@@ -85,7 +85,7 @@ deserunt mollit anim id est laborum."""[init:end]
             workflow[x].downloads=2
             workflow[x].versionInit="1.0"
             workflow[x].keywords="palabras clave"
-            #workflow.json = self.getJson()
+            workflow[x].json =self.getJson()
             workflow[x].save()
             cat = categoria[randint(0,4)]
             CategoriesAmount.objects.create(workflow = workflow[x], categories = cat)

@@ -6,19 +6,21 @@ from upload.forms import WorkflowForm
 from data.models import Category, Workflow,CategoriesAmount
 from find import views
 
+
 # Create your views here.
 
 def add_workflow(request):
     form = WorkflowForm()
     if request.method == 'POST':
-        form=WorkflowForm(request.POST)
+
+        form=WorkflowForm(request.POST, request.FILES)
+
         if form.is_valid():
+            print "posta 1"
             form.save(commit=True)
             return views.workflow_list(request)
         else:
             print(form.errors)
-
-
     categories = Category.objects.all()
 
 

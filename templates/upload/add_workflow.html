@@ -4,7 +4,7 @@
     <br>
         <h1>Add a WorkFlow</h1>
     <div>
-      <form id = "upload_form" method = "post" action="/upload/add_workflow/">
+      <form id = "upload_form" method = "post" action="/upload/add_workflow/ " enctype = "multipart/form-data">
         {% csrf_token %}
           {% for hidden in form.hidden_fields %}
             {{ hidden }}<br>

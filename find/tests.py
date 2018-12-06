@@ -6,23 +6,23 @@ from data.management.commands.populate import Command, CATEGORY, \
 from django.urls import reverse
 from django.db.models import Q
 import sys
-
+from find import views
 #execute: python manage.py test find.tests.FindTests.testNAME
 
 #very basis model testing, we just check the objects exists
 # returns all  workflows
-WORKFLOW_LIST = 'workflow_list'
+WORKFLOW_LIST = views.workflow_list
 # list of workflows related to a given category
-WORKFLOW_LIST_BY_CARTEGORY = 'workflow_list_by_category'
+WORKFLOW_LIST_BY_CARTEGORY = views.workflow_list
 # full information related with a workflow
-WORKFLOW_DETAIL = 'workflow_detail'
+WORKFLOW_DETAIL = views.workflow_detail
 # Dowload json with workflow
-WORKFLOW_DOWNLOAD = 'workflow_download'
+WORKFLOW_DOWNLOAD = views.workflow_download
 # get workflow but do not
 # increment download counter (it is used by workflow viewer -web component)
 WORKFLOW_DOWNLOAD_NO_COUNT = 'workflow_download_no_count'
 # search for workflows vy name or keyword
-WORKFLOW_SEARCH = 'workflow_search'
+WORKFLOW_SEARCH = views.workflow_search
 # Keywords
 KEYWORDS = 'KeyWords'
 # DEscription
@@ -53,7 +53,7 @@ class FindTests(TestCase):
 
         # if pagination implemented fill free to use
         # for workflow in workflows[:10]:
-        for workflow in workflows:
+        for workflow in workflows[:10]:
             self.assertIn(workflow.name, str(response.content))
             print ("    assert: %s"%workflow.name)
 

@@ -17,6 +17,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LdA834UAAAAABBcEfFBKRy2MShphhJoK0CZ-4QN'
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
@@ -37,7 +38,7 @@ SECRET_KEY = '_)c$0pq=u-dgkwrz6^0+b@f@%u_!c)@c%nv^*5vawc*)!h0h#u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [u'127.0.0.1']
 
 # Application definition
 
@@ -50,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'data',
     'find',
-    'upload'
+    'upload',
 ]
 
 MIDDLEWARE = [

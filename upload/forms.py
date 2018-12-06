@@ -38,3 +38,5 @@ class WorkflowForm(forms.ModelForm):
 
         print CategoriesAmount.objects.filter(workflow = workflow)
         workflow.save()
+        
+        return workflow

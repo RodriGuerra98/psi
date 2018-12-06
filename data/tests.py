@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 
-from django.test import TestCase
-
+from unittest import TestCase
 from data.models import Category, Workflow
-from data.management.commands.populate import Command, Category, Workflow
+from data.management.commands.populate import Command, CATEGORY, WORKFLOW
+# python manage.py tests data.tests
 
 #DO NOT MODIFIED ANYTHING BELLOW THIS POINT
 #very basic model testing, we just check the new objects exists

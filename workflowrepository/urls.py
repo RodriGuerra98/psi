@@ -13,21 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url ,include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
 from data import views
 import find
-from upload import views
+import upload
 
 urlpatterns = [
+
     url(r'^admin/', admin.site.urls),
-    url(r'^$', find.views.workflow_list, name='list'),
-    url(r'^workflow_list/(?P<category_slug>[-\w]+)/$', find.views.workflow_list, name='list'),
-    url(r'^workflow_detail/(?P<id>\d+)/(?P<slug>[-\w]+)/$', find.views.workflow_detail, name='workflow_detail'),
-    url(r'^workflow_search/$', find.views.workflow_search, name='workflow_search') ,
-    url(r'^upload/add_workflow/$', views.add_workflow, name="add_workflow"),
+    url(r'^', include('find.urls')),
+    url(r'^' ,include('upload.urls')),
+
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

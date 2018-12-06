@@ -69,7 +69,6 @@ deserunt mollit anim id est laborum."""[init:end]
             categoria[x].save()
         # create 5 categories <<<<<<<<<<<<<<<<<<<<<<<
         # baseName, call objects
-        print Category.objects.all()
 
     def addWorkflow(self, noWorkflows):
         workflow =[]
@@ -90,12 +89,12 @@ deserunt mollit anim id est laborum."""[init:end]
             cat = categoria[randint(0,4)]
             CategoriesAmount.objects.create(workflow = workflow[x], categories = cat)
             #workflow[x].category.add(cat)
-
-            cat = categoria[randint(0,4)]
-            CategoriesAmount.objects.create(workflow = workflow[x], categories = cat)
+            cat2 = categoria[randint(0,4)]
+            while cat2 == cat:
+                cat2 = categoria[randint(0,4)]
+            CategoriesAmount.objects.create(workflow = workflow[x], categories = cat2)
             #workflow[x].category.add(cat)
             workflow[x].save()
-        print Workflow.objects.all()
 
 
         # create 13 workflows  <<<<<<<<<<<<<<<<<<<<<<
@@ -233,7 +232,6 @@ deserunt mollit anim id est laborum."""[init:end]
         "numberOfThreads": 1,
         "numberOfMpi": 1,
         "ctfRelations": "82.__attribute__outputCTF",
-        "inputCoordinates": "123.__attribute__outputCoordinates",
         "inputMicrographs": "369.outputMicrographs"
     },
     {

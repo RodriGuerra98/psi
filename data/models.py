@@ -11,7 +11,7 @@ class Category(models.Model):
     name = models.CharField(blank=False, unique=True, max_length=128)
     slug = models.SlugField(blank=True, unique=True, max_length=512)
     created = models.DateField(default=datetime.date.today) #esta bien pero mejor la base de datos, mirar documentacion de DateField
-    tooltip = models.CharField(max_length=128)
+    tooltip = models.CharField(max_length=128, default ="TOOLTIP")
 
     def save(self, *args, **kwargs):
         self.slug =  slugify(self.name)
@@ -28,13 +28,13 @@ class Workflow(models.Model):
     slug = models.SlugField(blank=True, unique=True, max_length=512)
     created = models.DateField(default=datetime.date.today)
     category = models.ManyToManyField(Category, through ='CategoriesAmount')
-    keywords = models.CharField(max_length=512, default="")
-    description = models.CharField(max_length=512, default="")
+    keywords = models.CharField(max_length=512, default="palabras clave")
+    description = models.CharField(max_length=512, default="Descripcion")
     views = models.IntegerField(default = 0)
     downloads = models.IntegerField(default =0)
-    versionInit = models.CharField(max_length=512)
+    versionInit = models.CharField(max_length=512, default ="1.0")
     client_ip = models.GenericIPAddressField(default='127.0.0.1')
-    json = models.CharField(max_length=20000, default="hola")
+    json = models.CharField(max_length=20000, default="")
 
     def save(self, *args, **kwargs):
         self.slug =  slugify(self.name)

@@ -14,14 +14,19 @@
        App
        {% endblock %}
      </title>
-  </head>
+     {% block scripts %}
+     {% endblock %}
+
+     <script src='https://www.google.com/recaptcha/api.js'></script>
+    </head>
 
   <header>{% block header %}
     <h1> <a href="/">App HEROKU</a></h1>
 
     {% endblock %}
   </header>
-
+  {% block script%}
+  {% endblock %}
   <body>
 
     <div class="flex-container">

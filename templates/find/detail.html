@@ -1,10 +1,27 @@
+
+
 {% extends 'base.html' %}
 
+{%load static %}
+{% block scripts %}
+  <script src="{% static 'js/webcomponents/webcomponents-loader.js' %}"></script>
+  <link rel="import "href="{% static 'scipion-workflow.html' %}">
+{% endblock %}
 {% block article %}
+
+
   {% if result == False %}
     <h3>{{error}}</h3>
 
   {% else  %}
+
+  <div>
+    <scipion-workflow
+      src="{% url 'workflow_download_json' workflow.id workflow.slug %}"
+      height = "400px" widht="95%">
+    </scipion-workflow>
+  </div>
+  <div>
     <a>Nombre: {{workflow.name}}</a> <br>
     <a>Categorias: </a>
     {% for c in categories%}
@@ -13,6 +30,21 @@
     <br>
     <a>KeyWords: {{workflow.keywords}}</a><br>
     <a>Description: {{workflow.description}}</a><br>
-  {%  endif %}
+
+    {% if status is False %}
+    <h3> Rellene validador CAPTCHA para descargar el fichero json <h3>
+    {% endif %}
+    <form method="post" action = "{% url 'workflow_download' workflow.id workflow.slug %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <div class="g-recaptcha" data-sitekey="6LdA834UAAAAAEAH-GbJevX8faT2QcNV3X9F7PuE"></div>
+
+    <button type="submit" class="btn btn-primary">Download</button>
+  </form>
+</div>
+      {%  endif %}
+
 
 {% endblock %}

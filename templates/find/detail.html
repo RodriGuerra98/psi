@@ -5,7 +5,7 @@
 {%load static %}
 {% block scripts %}
   <script src="{% static 'js/webcomponents/webcomponents-loader.js' %}"></script>
-  <link rel="import "href="{% static 'scipion-workflow.html' %}">
+  <link rel="import" href="{% static 'scipion-workflow.html' %}">
 {% endblock %}
 {% block article %}
 
@@ -15,13 +15,15 @@
 
   {% else  %}
 
-  <div>
-    <scipion-workflow
-      src="{% url 'workflow_download_json' workflow.id workflow.slug %}"
-      height = "400px" widht="95%">
-    </scipion-workflow>
-  </div>
-  <div>
+
+
+  <scipion-workflow
+    src="{% url 'workflow_download_json' workflow.id workflow.slug %}"
+    height = "400px" width="50%">
+  </scipion-workflow>
+
+
+  <div width = "25%">
     <a>Nombre: {{workflow.name}}</a> <br>
     <a>Categorias: </a>
     {% for c in categories%}

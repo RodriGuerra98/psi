@@ -86,6 +86,7 @@ def workflow_detail(request, id, slug):
     _dict['categories'] = []
     _dict['categories'] = categories_aux
     _dict['status'] = status
+
     return render(request, "find/detail.html", context = _dict)
 
 def workflow_search(request):

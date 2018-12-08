@@ -38,7 +38,7 @@ def workflow_list(request, category_slug=None):
             found=False
             error = "Error"
 
-    paginator = Paginator(workflows, 10)
+    paginator = Paginator(workflows, 8)
     try:
         workflows_p = paginator.page(page)
     except PageNotAnInteger:

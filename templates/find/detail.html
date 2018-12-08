@@ -12,26 +12,26 @@
 
   {% if result == False %}
     <h3>{{error}}</h3>
-
   {% else  %}
 
 
 
   <scipion-workflow
     src="{% url 'workflow_download_json' workflow.id workflow.slug %}"
-    height = "400px" width="50%">
+    height = "400px" width="40%" >
   </scipion-workflow>
 
 
-  <div width = "25%">
-    <a>Nombre: {{workflow.name}}</a> <br>
-    <a>Categorias: </a>
-    {% for c in categories%}
-      <a>{{c.name}},</a>
-    {% endfor %}
-    <br>
-    <a>KeyWords: {{workflow.keywords}}</a><br>
-    <a>Description: {{workflow.description}}</a><br>
+  <div class = "detalles_workflow">
+    <p>Nombre: {{workflow.name}}</p>
+    <p>
+      Categorias:
+      {% for c in categories%}
+        <a href="{% url 'workflow_list' c.slug%}">{{c.name}}</a>
+      {% endfor %}
+    </p>
+    <p>KeyWords: {{workflow.keywords}}</p>
+    <ap>Description: {{workflow.description}}</p>
 
     {% if status is False %}
     <h3> Rellene validador CAPTCHA para descargar el fichero json <h3>

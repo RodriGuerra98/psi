@@ -1,21 +1,20 @@
 {% extends 'base.html' %}
 
 {% block article %}
-    <br>
         <h1>Add a WorkFlow</h1>
-    <div>
-      <form id = "upload_form" method = "post" action="/upload/add_workflow/ " enctype = "multipart/form-data">
+    <div class="tamanotabla">
+      <form id = "upload_form" method = "post" action="{% url 'add_workflow' %} " enctype = "multipart/form-data">
         {% csrf_token %}
-          {% for hidden in form.hidden_fields %}
-            {{ hidden }}<br>
-          {% endfor %}
+        <table class=" izquierda">
         {% for field in form.visible_fields %}
-          {{ field.help_text }}
-          {{ field }}<br>
+          <tr class="fila">
+            <th class="columna">{{ field.help_text }}</th>
+            <th class="columna">{{ field }}</th>
+          </tr>
         {% endfor %}
-        <br>
-      <input type="submit"  value= "Upload Workflow">
+      </table>
+      <br>
+      <input type="submit" class="izquierda"  value= "Upload Workflow">
       </form>
-
     </div>
 {% endblock %}

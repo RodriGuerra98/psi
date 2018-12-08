@@ -2,24 +2,37 @@
 
 {% block content %}
   {% block nav %}
-    <A>CATEGORIAS<A><br>
-      <a href="/">All</a><br>
-    {% for c in categories%}
-    <a href="/workflow_list/{{c.slug}}/">{{c.name}}</a>
-    <br>
-    {% endfor %}
-    <br>
-    <a  href = "{% url 'add_workflow' %}"> Upload Workflow</a>
+    <h3>CATEGORIAS<h3 >
+    <ul id= "nav">
+          <li >
+              <a href="/">All</a>
+          </li>
+          <br>
+          {% for c in categories%}
+          <li class="active">
+              <a href="/workflow_list/{{c.slug}}/">{{c.name}}</a>
+          </li>
+          <br>
+          {% endfor %}
+      </ul>
 
+    <br>
+
+    <form  action="{% url 'add_workflow' %} ">
+    <input type="submit"  value= "Upload Workflow">
+    </form>
   {% endblock %}
 
   {% block article %}
   <div class = "margin_izquierda">
-  <A>WORKFLOWS<A><br>
+
+    <h3>WORKFLOWS ({{category.name}})<h3>
+
     {% for w in workflows_p%}
+    <p>
       <a href="/workflow_detail/{{w.id}}/{{w.slug}}">{{w.name}}</a>
-      <a> : {{w.description}}</a>
-    <br>
+      : {{w.description}}
+    <p>
     {% endfor %}
     {% if workflows_p.has_previous %}
       <a href="?page={{ workflows_p.previous_page_number }}">&laquo;</a>

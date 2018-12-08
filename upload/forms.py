@@ -7,7 +7,7 @@ class WorkflowForm(forms.ModelForm):
     description = forms.CharField(max_length=512, help_text ="Description: ")
     versionInit = forms.CharField(max_length=512, help_text = "versionInit:")
     category = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), help_text = "Categorias: ")
-    json = forms.FileField()
+    json = forms.FileField(help_text="Fichero JSON:")
 
     class Meta:
         model = Workflow
@@ -38,5 +38,5 @@ class WorkflowForm(forms.ModelForm):
 
         print CategoriesAmount.objects.filter(workflow = workflow)
         workflow.save()
-        
+
         return workflow

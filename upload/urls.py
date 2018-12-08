@@ -5,7 +5,7 @@ from upload import views
 
 
 urlpatterns = [
-    url(r'^upload/add_workflow/$', views.add_workflow, name="add_workflow"),
+    url(r'^add_workflow/$', views.add_workflow, name="add_workflow"),
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

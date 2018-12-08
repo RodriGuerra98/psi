@@ -30,10 +30,10 @@
   <body>
 
     <div class="flex-container">
-      <div class=" azul1 ">
+      <div class="subheader ">
         {% block subheader %}
-        <h5>Search Workflow</h5>
-        <form action='/workflow_search/' method='post'>
+        <h3 class ="izquierda margin_derecha">Search Workflow</h3>
+        <form action='/workflow_search/' method='post' class = "margin_top izquierda">
           {% csrf_token %}
           <select name="selector">
            <option value="name">Name</option>
@@ -46,12 +46,12 @@
       </div>
 
       <div class= "tamanopadre">
-          <div class="tamanohijo1  menulateral izquierda">
+          <div class="tamanohijo1  menulateral izquierda margin_izquierda">
             {% block nav %}
             {% endblock %}
     			</div>
 
-    			<div class="tamanohijo2 izquierda frame txt_izquierda  ">
+    			<div class="tamanohijo2 izquierda  txt_izquierda  margin_izquierda">
     				{% block article %}
             {% endblock %}
           </div>
@@ -60,7 +60,7 @@
     </div>
   </body>
 
-  <footer class="centrado azul1 footer">
+  <footer class="centrado footer">
     {% block footer %}
     <h4> Footer de la app</h4>
     {% endblock %}

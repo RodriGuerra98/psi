@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
-{% block article %}
-        <h1>Add a WorkFlow</h1>
+{% block principal %}
+    <h1 class ="izquierda">Add a WorkFlow</h1>
     <div class="tamanotabla">
       <form id = "upload_form" method = "post" action="{% url 'add_workflow' %} " enctype = "multipart/form-data">
         {% csrf_token %}

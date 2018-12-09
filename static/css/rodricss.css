@@ -17,6 +17,12 @@ button,input, select{
     text-transform: none
 }
 
+
+.canvas {
+    grid-area: canvas;
+    padding : 1em;
+}
+
 a:hover {
     color: #77b6e2;
 }
@@ -127,13 +133,21 @@ li a.active a{
 
 }
 .detalles_workflow{
-  width:50%;
-  float:right;
+  width:20%;
+  height: 100%;
+  float:left;
+  text-align:left;
 }
-.canvas{
-    float:left;
+
+.mitad_izquierda{
+  width: 50%;
+  height: 100%;
+  float:left;
 
 }
+
+
+
 .nav ul {
 
     margin: 0;
@@ -174,7 +188,7 @@ li a {
 }
 
 .tamanotabla{
-    width: 60%;
+    width: 50%;
     height: 60%;
 
 }

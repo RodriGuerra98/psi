@@ -1,8 +1,7 @@
 from unittest import TestCase
 from django.test import Client
 from data.models import Category, Workflow
-from data.management.commands.populate import Command, CATEGORY, \
-    WORKFLOW
+from data.management.commands.populate import Command, CATEGORY, WORKFLOW
 from django.urls import reverse
 from django.db.models import Q
 import sys
@@ -53,7 +52,7 @@ class FindTests(TestCase):
 
         # if pagination implemented fill free to use
         # for workflow in workflows[:10]:
-        for workflow in workflows[:10]:
+        for workflow in workflows[:8]:
             self.assertIn(workflow.name, str(response.content))
             print ("    assert: %s"%workflow.name)
 

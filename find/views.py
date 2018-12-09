@@ -114,12 +114,17 @@ def workflow_search(request):
             error = "Error en buscar un workflow con slug"
             print "El workflow con ese slug no existe"
 
+    categories = CategoriesAmount.objects.filter(workflow = workflow )
+    categories_aux = []
+    for x in categories:
+        categories_aux.append(Category.objects.get(id=x.categories.id))
+
     _dict = {}
     _dict['result'] = result      # False if no workflow satisfices the query
     _dict['workflow'] = workflow  # workflow with name = name
     _dict['error'] = error        # message to display if results == False
     _dict['categories'] = []
-    _dict['categories'] = categories
+    _dict['categories'] = categories_aux
     return render(request, 'find/detail.html', context= _dict)
 
 

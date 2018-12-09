@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% block nav %}
+{% block principal %}
+<div class="tamanohijo1  menulateral izquierda margin_izquierda">
+
     <h3>CATEGORIAS<h3 >
     <ul id= "nav">
           <li >
@@ -21,9 +23,10 @@
     <form  action="{% url 'add_workflow' %} ">
     <input type="submit"  value= "Upload Workflow">
     </form>
-  {% endblock %}
 
-  {% block article %}
+    </div>
+    <div class="tamanohijo2 izquierda  txt_izquierda  margin_izquierda">
+
   <div class = "margin_izquierda">
 
     <h3>WORKFLOWS ({{category.name}})<h3>
@@ -52,6 +55,8 @@
       <a class="disabled"><span>&raquo;</span></a>
     {% endif %}
   </div>
+      </div>
+
 
    {% endblock %}
 {% endblock %}

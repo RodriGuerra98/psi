@@ -7,7 +7,7 @@
   <script src="{% static 'js/webcomponents/webcomponents-loader.js' %}"></script>
   <link rel="import" href="{% static 'scipion-workflow.html' %}">
 {% endblock %}
-{% block article %}
+{% block principal %}
 
 
   {% if result == False %}
@@ -15,12 +15,12 @@
   {% else  %}
 
 
-
+  <div class="mitad_izquierda canvas">
   <scipion-workflow
     src="{% url 'workflow_download_json' workflow.id workflow.slug %}"
-    height = "400px" width="40%" >
+    height = "400px" width="95%" >
   </scipion-workflow>
-
+</div>
 
   <div class = "detalles_workflow">
     <p>Nombre: {{workflow.name}}</p>

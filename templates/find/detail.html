@@ -14,15 +14,12 @@
     <h3>{{error}}</h3>
   {% else  %}
 
-
-  <div class="mitad_izquierda canvas">
-  <scipion-workflow
-    src="{% url 'workflow_download_json' workflow.id workflow.slug %}"
-    height = "400px" width="95%" >
-  </scipion-workflow>
-</div>
-
   <div class = "detalles_workflow">
+    <scipion-workflow
+      src="{% url 'workflow_download_json' workflow.id workflow.slug %}"
+      height = "400px" width="95%" >
+    </scipion-workflow>
+
     <p>Nombre: {{workflow.name}}</p>
     <p>
       Categorias:

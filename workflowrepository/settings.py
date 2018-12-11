@@ -38,7 +38,7 @@ SECRET_KEY = '_)c$0pq=u-dgkwrz6^0+b@f@%u_!c)@c%nv^*5vawc*)!h0h#u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'127.0.0.1', u'proyecto-rodrigo-sara.herokuapp.com']
+ALLOWED_HOSTS = [u'127.0.0.1', u'glacial-lowlands-37040.herokuapp.com']
 
 # Application definition
 

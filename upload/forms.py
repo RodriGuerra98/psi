@@ -19,21 +19,16 @@ class WorkflowForm(forms.ModelForm):
         workflow.keywords = self.data['keywords']
         workflow.versionInit = self.data['versionInit']
         workflow.description = self.data['description']
-        #workflow.json = self.data['json']
-        print "posta 2"
         workflowFile = self.cleaned_data['json']
         file_data = workflowFile.read().decode('utf-8')
         self.instance.json = file_data
         workflow.json = file_data
-        print "posta 3"
-        #print workflow.json
+
+        print "OBSERVANDO"
         workflow.save()
+        
         categorias = self.cleaned_data['category']
-        print '******************'
-        print categorias
         for x in categorias:
-            print "Dentro del bucle"
-            print x
             CategoriesAmount.objects.get_or_create(workflow= workflow, categories= x)
 
         print CategoriesAmount.objects.filter(workflow = workflow)

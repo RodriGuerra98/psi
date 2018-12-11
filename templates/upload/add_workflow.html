@@ -5,7 +5,14 @@
     <div class="tamanotabla">
       <form id = "upload_form" method = "post" action="{% url 'add_workflow' %} " enctype = "multipart/form-data">
         {% csrf_token %}
+
         <table class=" izquierda">
+        {% if status is False %}
+        <br>
+        <div class="error_name">
+        <p> Ya existe un workflow con este nombre </p>
+      </div>
+        {% endif%}
         {% for field in form.visible_fields %}
           <tr class="fila">
             <th class="columna">{{ field.help_text }}</th>
@@ -13,6 +20,8 @@
           </tr>
         {% endfor %}
       </table>
+
+
       <br>
       <input type="submit" class="izquierda"  value= "Upload Workflow">
       </form>

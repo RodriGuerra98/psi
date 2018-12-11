@@ -23,6 +23,14 @@ button,input, select{
     padding : 1em;
 }
 
+.error_name{
+  color:red;
+}
+
+.error_name p {
+  
+}
+
 a:hover {
     color: #77b6e2;
 }

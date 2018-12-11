@@ -11,12 +11,12 @@ from find import views
 
 def add_workflow(request):
     form = WorkflowForm()
+    status = True
     if request.method == 'POST':
 
         form=WorkflowForm(request.POST, request.FILES)
 
         if form.is_valid():
-            print "posta 1"
 
             workflow=form.save(commit=True)
             _dict = {}
@@ -33,8 +33,11 @@ def add_workflow(request):
             return render (request, "find/detail.html",context = _dict )
         else:
             print(form.errors)
+            status = False
+
+
     categories = Category.objects.all()
 
 
 
-    return render(request, 'upload/add_workflow.html', {'form' : form, 'categories' : categories})
+    return render(request, 'upload/add_workflow.html', {'form' : form, 'categories' : categories, 'status' : status})

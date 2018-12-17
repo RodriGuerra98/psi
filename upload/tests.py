@@ -1,9 +1,9 @@
 from unittest import TestCase
 from django.test import Client
-from data.models import Category, Workflow, User
+from data.models import Category, Workflow
 from data.management.commands.populate import Command, CATEGORY
 from django.urls import reverse
-from upload.forms import WorkFlowFormBase
+from upload.forms import WorkflowForm
 from django.core.files.uploadedfile import SimpleUploadedFile
 import json
 from django.core.exceptions import ObjectDoesNotExist

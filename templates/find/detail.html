@@ -14,36 +14,50 @@
     <h3>{{error}}</h3>
   {% else  %}
 
-  <div class = "detalles_workflow">
-    <scipion-workflow
-      src="{% url 'workflow_download_json' workflow.id workflow.slug %}"
-      height = "400px" width="95%" >
-    </scipion-workflow>
+      <div class = "detalles_workflow">
+        <scipion-workflow
+          src="{% url 'workflow_download_json' workflow.id workflow.slug %}"
+          height = "400px" width="95%" >
+        </scipion-workflow>
 
-    <p>Nombre: {{workflow.name}}</p>
-    <p>
-      Categorias:
-      {% for c in categories%}
-        <a href="{% url 'workflow_list' c.slug%}">{{c.name}}</a>
-      {% endfor %}
-    </p>
-    <p>KeyWords: {{workflow.keywords}}</p>
-    <ap>Description: {{workflow.description}}</p>
+        <p>Nombre: {{workflow.name}}</p>
+        <p>
+          Categorias:
+          {% for c in categories%}
+            <a href="{% url 'workflow_list' c.slug%}">{{c.name}}</a>
+          {% endfor %}
+        </p>
+        <p>KeyWords: {{workflow.keywords}}</p>
+        <p>Description: {{workflow.description}}</p>
 
-    {% if status is False %}
-    <h3> Rellene validador CAPTCHA para descargar el fichero json <h3>
-    {% endif %}
-    <form method="post" action = "{% url 'workflow_download' workflow.id workflow.slug %}">
-    {% csrf_token %}
-    {{ form.as_p }}
+        {% if status is False %}
+        <h3> Rellene validador CAPTCHA para descargar/borrar el workflow <h3>
+        {% endif %}
 
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-    <div class="g-recaptcha" data-sitekey="6LdA834UAAAAAEAH-GbJevX8faT2QcNV3X9F7PuE"></div>
+        <form class="captcha" method="post" action = "{% url 'workflow_download' workflow.id workflow.slug %}">
+            {% csrf_token %}
+            {{ form.as_p }}
 
-    <button type="submit" class="btn btn-primary">Download</button>
-  </form>
-</div>
-      {%  endif %}
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div class="margin_izquierda g-recaptcha" data-sitekey="6LdA834UAAAAAEAH-GbJevX8faT2QcNV3X9F7PuE"></div>
+
+            <button type="submit" class="margin_izquierda">Download</button>
+        </form>
+
+      {% if delete is True%}
+        <form class="captcha" method="post" action = "{% url 'workflow_delete' workflow.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <div class="margin_izquierda g-recaptcha" data-sitekey="6LdA834UAAAAAEAH-GbJevX8faT2QcNV3X9F7PuE"></div>
+
+        <button type="submit" class="margin_izquierda">Delete</button>
+
+        </form>
+      {% endif %}
+    </div>
+{%  endif %}
 
 
 {% endblock %}

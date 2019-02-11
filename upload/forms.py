@@ -1,5 +1,6 @@
 from django import forms
 from data.models import Workflow, Category, CategoriesAmount
+from workflowrepository.wsgi import s
 
 class WorkflowForm(forms.ModelForm):
     name = forms.CharField( max_length=128, help_text="Name: ")
@@ -11,7 +12,7 @@ class WorkflowForm(forms.ModelForm):
 
     class Meta:
         model = Workflow
-        exclude=('slug','created','views', 'downloads', 'client_ip')
+        exclude=('slug','created','views', 'downloads', 'client_ip','delete_id')
 
     def save(self, *args, **kwargs):
         workflow = Workflow()
@@ -23,10 +24,11 @@ class WorkflowForm(forms.ModelForm):
         file_data = workflowFile.read().decode('utf-8')
         self.instance.json = file_data
         workflow.json = file_data
+        workflow.delete_id = s.session_key
 
         print "OBSERVANDO"
         workflow.save()
-        
+
         categorias = self.cleaned_data['category']
         for x in categorias:
             CategoriesAmount.objects.get_or_create(workflow= workflow, categories= x)

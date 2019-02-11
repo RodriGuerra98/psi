@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^workflow_search/$', views.workflow_search, name='workflow_search') ,
     url(r'^workflow_download/(?P<id>\d+)/(?P<slug>[-\w]+)/$', views.workflow_download, name="workflow_download"),
     url(r'^workflow_download_json/(?P<id>\d+)/(?P<slug>[-\w]+)/$', views.workflow_download_json, name="workflow_download_json"),
+    url(r'^workflow_delete/(?P<id>\d+)/$', views.workflow_delete, name="workflow_delete"),
 
 
 ]

@@ -24,6 +24,7 @@ def add_workflow(request):
             _dict['workflow'] = workflow
             _dict['error']="Error al cargar los detalles"
             _dict['categories'] = []
+            _dict['delete'] = True
             categories = CategoriesAmount.objects.filter(workflow = workflow )
             categories_aux = []
             for x in categories:

@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^', include('find.urls')),
     url(r'^' ,include('upload.urls')),
 
+
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

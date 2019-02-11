@@ -11,6 +11,7 @@ import urllib2
 import json
 from data.models import Category, Workflow,CategoriesAmount
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from workflowrepository.wsgi import s
 
 # Create your views here.
 import json
@@ -26,17 +27,20 @@ def workflow_list(request, category_slug=None):
     error = ""
     category = None
     workflows=[]
+    print "ESTA ES LA SESSION KEY: " + s.session_key
+
     if category_slug == None:
         workflows= list(Workflow.objects.all())
 
     else:
-        category = Category.objects.get(slug=category_slug)
-        cat = CategoriesAmount.objects.filter(categories=category)
-        for x in cat:
-            workflows.append(Workflow.objects.get(id=x.workflow.id))
-        if len(workflows) == 0:
+        try:
+            category = Category.objects.get(slug=category_slug)
+            cat = CategoriesAmount.objects.filter(categories=category)
+            for x in cat:
+                workflows.append(Workflow.objects.get(id=x.workflow.id))
+        except ObjectDoesNotExist:
             found=False
-            error = "Error"
+            error = "Error categoria no encontrada"
 
     paginator = Paginator(workflows, 8)
     try:
@@ -67,8 +71,12 @@ def workflow_detail(request, id, slug):
     result= True
     error = ""
     workflow = None
+    delete = False
     try:
         workflow = Workflow.objects.get(id=id)
+        print "Antes del IF: "+ s.session_key + " " + workflow.delete_id + "Fecha de expiracion: " + str(s.get_expiry_date())
+        if(s.session_key == workflow.delete_id):
+            delete = True
     except ObjectDoesNotExist:
         result = False
         error = "Error en buscar un workflow con nombre"
@@ -86,6 +94,7 @@ def workflow_detail(request, id, slug):
     _dict['categories'] = []
     _dict['categories'] = categories_aux
     _dict['status'] = status
+    _dict['delete'] = delete
 
     return render(request, "find/detail.html", context = _dict)
 
@@ -146,7 +155,7 @@ def workflow_download(request, id ,slug, count = True):
     ''' End reCAPTCHA validation '''
 
     if result['success']:
-        messages.success(request, 'New comment added with success!')
+        messages.success(request, 'New workflow added with success!')
         print "EL CAPTCHA SE HA RELLENADO"
         workflow =  Workflow.objects.get(id = id)
         if workflow is None :
@@ -173,3 +182,37 @@ def workflow_download_json(request, id , slug):
         print "El workflow con ese slug no existe"
 
     return HttpResponse ( workflow.json, content_type="application/octet-stream")
+
+def workflow_delete(request, id):
+    workflow = None
+
+    global status
+    ''' Begin reCAPTCHA validation '''
+    recaptcha_response = request.POST.get('g-recaptcha-response')
+    url = 'https://www.google.com/recaptcha/api/siteverify'
+    values = {
+        'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+        'response': recaptcha_response
+    }
+    data = urllib.urlencode(values)
+    req = urllib2.Request(url, data)
+    response = urllib2.urlopen(req)
+    result = json.load(response)
+    print "VALIDACION RECAPTCHA"
+    print result
+    ''' End reCAPTCHA validation '''
+
+    if result['success']:
+        messages.success(request, 'New comment added with success!')
+        print "EL CAPTCHA SE HA RELLENADO"
+        try:
+            workflow =  Workflow.objects.get(id = id)
+            if(s.session_key == workflow.delete_id):
+                workflow.delete()
+        except ObjectDoesNotExist:
+            print "El workflow con ese id no existe"
+    else:
+        status=False
+        messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+
+    return redirect('list')

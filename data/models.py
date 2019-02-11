@@ -35,6 +35,7 @@ class Workflow(models.Model):
     versionInit = models.CharField(max_length=512, default ="1.0")
     client_ip = models.GenericIPAddressField(default='127.0.0.1')
     json = models.CharField(max_length=20000, default="")
+    delete_id = models.CharField(max_length=40, default="") #Aqui deberia ir session_key
 
     def save(self, *args, **kwargs):
         self.slug =  slugify(self.name)

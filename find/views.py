@@ -41,7 +41,7 @@ def workflow_list(request, category_slug=None):
         except ObjectDoesNotExist:
             found=False
             error = "Error categoria no encontrada"
-
+    print workflows.sort()
     paginator = Paginator(workflows, 8)
     try:
         workflows_p = paginator.page(page)

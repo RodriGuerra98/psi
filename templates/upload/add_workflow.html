@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block principal %}
+
+    {% if result == False %}
+      <h3>{{error}}</h3>
+    {% else  %}
     <h1 class ="izquierda">Add a WorkFlow</h1>
     <div class="tamanotabla">
       <form id = "upload_form" method = "post" action="{% url 'add_workflow' %} " enctype = "multipart/form-data">
@@ -26,4 +30,5 @@
       <input type="submit" class="izquierda"  value= "Upload Workflow">
       </form>
     </div>
+    {% endif %}
 {% endblock %}

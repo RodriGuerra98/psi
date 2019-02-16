@@ -11,12 +11,14 @@ import urllib2
 import json
 from data.models import Category, Workflow,CategoriesAmount
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from workflowrepository.wsgi import s
+
+from django.contrib.sessions.backends.db import SessionStore
 
 # Create your views here.
 import json
 
 status = True
+s = SessionStore()
 def workflow_list(request, category_slug=None):
     global status
     status = True
@@ -27,7 +29,14 @@ def workflow_list(request, category_slug=None):
     error = ""
     category = None
     workflows=[]
-    print "ESTA ES LA SESSION KEY: " + s.session_key
+
+    if s.session_key is None:
+        s.clear()
+        s.create()
+        s.cycle_key()
+        s.set_expiry(10)
+    print " Fecha de expiracion:  "+ str(s.get_expiry_date()) + str(s.session_key)
+
 
     if category_slug == None:
         workflows= list(Workflow.objects.all())
@@ -40,8 +49,8 @@ def workflow_list(request, category_slug=None):
                 workflows.append(Workflow.objects.get(id=x.workflow.id))
         except ObjectDoesNotExist:
             found=False
-            error = "Error categoria no encontrada"
-    print workflows.sort()
+            error = "Error no hay ninguna categoria, ni workflow cargado en la base de datos"
+    workflows.sort(key=str)
     paginator = Paginator(workflows, 8)
     try:
         workflows_p = paginator.page(page)
@@ -67,6 +76,7 @@ def workflow_list(request, category_slug=None):
 
 def workflow_detail(request, id, slug):
     global status
+    global s
     _dict = {}
     result= True
     error = ""
@@ -74,9 +84,11 @@ def workflow_detail(request, id, slug):
     delete = False
     try:
         workflow = Workflow.objects.get(id=id)
-        print "Antes del IF: "+ s.session_key + " " + workflow.delete_id + "Fecha de expiracion: " + str(s.get_expiry_date())
-        if(s.session_key == workflow.delete_id):
-            delete = True
+        if s is None:
+            print "No se ha creado la sesión"
+        else:
+            if(s.session_key == workflow.delete_id):
+                delete = True
     except ObjectDoesNotExist:
         result = False
         error = "Error en buscar un workflow con nombre"
@@ -185,7 +197,7 @@ def workflow_download_json(request, id , slug):
 
 def workflow_delete(request, id):
     workflow = None
-
+    global s
     global status
     ''' Begin reCAPTCHA validation '''
     recaptcha_response = request.POST.get('g-recaptcha-response')
@@ -207,12 +219,16 @@ def workflow_delete(request, id):
         print "EL CAPTCHA SE HA RELLENADO"
         try:
             workflow =  Workflow.objects.get(id = id)
-            if(s.session_key == workflow.delete_id):
-                workflow.delete()
+            if s is None:
+                print "No se ha creado la sesión"
+            else:
+                if(s.session_key == workflow.delete_id):
+                    workflow.delete()
         except ObjectDoesNotExist:
             print "El workflow con ese id no existe"
     else:
         status=False
         messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-
+        workflow = Workflow.objects.get(id = id)
+        return redirect('workflow_detail', id = id, slug= workflow.slug )
     return redirect('list')

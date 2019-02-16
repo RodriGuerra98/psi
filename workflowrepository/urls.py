@@ -20,6 +20,10 @@ from django.conf import settings
 from data import views
 import find
 import upload
+from django.conf.urls import handler404
+from workflowrepository.views import mi_error_404
+
+handler404 = mi_error_404
 
 urlpatterns = [
 

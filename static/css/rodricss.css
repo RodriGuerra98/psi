@@ -155,7 +155,7 @@ li a.active a{
   float: left;
   text-align: left;
   min-width: 332px;
-  min-height:400px; 
+  min-height:400px;
 }
 
 .mitad_izquierda{
@@ -165,10 +165,7 @@ li a.active a{
 
 }
 
-
-
 .nav ul {
-
     margin: 0;
     padding: 0;
     font-family: sans-serif;

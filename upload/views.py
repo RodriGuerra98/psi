@@ -4,22 +4,22 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from upload.forms import WorkflowForm
 from data.models import Category, Workflow,CategoriesAmount
+from find import views
 
 
 # Create your views here.
-from find import views
 
 def add_workflow(request):
     form = WorkflowForm()
     status = True
     error = ""
     result = True
-
     if request.method == 'POST':
 
         form=WorkflowForm(request.POST, request.FILES)
 
         if form.is_valid():
+
             workflow=form.save(commit=True)
             _dict = {}
             _dict['result'] = True

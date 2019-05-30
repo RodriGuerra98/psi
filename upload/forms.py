@@ -1,6 +1,6 @@
 from django import forms
 from data.models import Workflow, Category, CategoriesAmount
-from find import views
+from workflowrepository.wsgi import s
 
 class WorkflowForm(forms.ModelForm):
     name = forms.CharField( max_length=128, help_text="Name: ")
@@ -24,7 +24,7 @@ class WorkflowForm(forms.ModelForm):
         file_data = workflowFile.read().decode('utf-8')
         self.instance.json = file_data
         workflow.json = file_data
-        workflow.delete_id = views.s.session_key
+        workflow.delete_id = s.session_key
 
         print "OBSERVANDO"
         workflow.save()

@@ -11,7 +11,7 @@
         {% csrf_token %}
 
         <table class=" izquierda">
-        {% if status is False %}
+        {% if status == False %}
         <br>
         <div class="error_name">
         <p> Ya existe un workflow con este nombre </p>

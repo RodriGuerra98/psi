@@ -33,7 +33,7 @@
         <p>Version: {{workflow.versionInit}}</p>
 
 
-        {% if status is False %}
+        {% if status == False %}
         <h3> Rellene validador CAPTCHA para descargar/borrar el workflow <h3>
         {% endif %}
 
@@ -47,7 +47,7 @@
             <button type="submit" class="margin_izquierda">Download</button>
         </form>
 
-      {% if delete is True%}
+      {% if delete == True%}
         <form class="captcha" method="post" action = "{% url 'workflow_delete' workflow.id %}">
         {% csrf_token %}
         {{ form.as_p }}
